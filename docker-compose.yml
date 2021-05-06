@@ -1,0 +1,22 @@
+version: '3'
+services:
+    phpapache:
+        build: 
+            context: ./phpapache
+        ports:
+            - '80:80'
+        links:
+            - 'mysql'
+        volumes:
+            - './html:/var/www/html'
+    mysql:
+        image: 'mysql:8.0.24'
+        volumes: 
+            - './mysql:/var/lib/mysql'
+        environment:
+            TZ: "Europe/Rome"
+            MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+            MYSQL_ROOT_PASSWORD: "rootpassword"
+            MYSQL_USER: 'user'
+            MYSQL_PASSWORD: 'password'
+            MYSQL_DATABASE: 'database'
